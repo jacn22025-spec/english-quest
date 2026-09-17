@@ -366,7 +366,12 @@ nav button .ico{filter:drop-shadow(0 4px 5px #795f6b1c)}
 #wardrobe>.card>.tabs,#wardrobe>.card>.choices,#wardrobe>.card>.v88Beauty,#wardrobe>.card>.v91Beauty{display:none!important}
 .v92Control{min-height:145px;padding:7px;border:1px solid #eadce2;border-radius:20px;background:linear-gradient(145deg,#fff8fb,#f3faff);overflow:hidden}.v92Tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:6px}.v92Tabs button{min-height:34px;padding:4px 1px;border:1px solid #eadce2;border-radius:12px;background:#fff;color:#675a6d;font-size:10px;font-weight:900}.v92Tabs button.sel{background:linear-gradient(135deg,#ffd7e5,#eeeaff);border-color:#e7abc1}.v92Body{display:flex;gap:5px;overflow-x:auto;overflow-y:hidden;padding:1px 1px 5px}.v92Body::-webkit-scrollbar{display:none}.v92Body button{flex:0 0 78px;min-height:60px;padding:5px;border:1px solid #eadde2;border-radius:14px;background:#fff;color:#66596c;font-size:9px;font-weight:800}.v92Body i{display:block;width:25px;height:25px;border-radius:50%;margin:0 auto 3px;border:2px solid white;box-shadow:0 0 0 1px #e1d5da}
 @media(max-height:700px){#wardrobe>.card{height:calc(100dvh - 160px)!important;min-height:485px!important}#wardrobe .wardStage{min-height:255px!important}.v92Control{min-height:132px}.v92Body button{min-height:51px}}
-</style></head><body><div class="app"><header><button class="menu">≡</button><div class="logo">English<br>Quest <small style="font:700 10px sans-serif;letter-spacing:1px;color:#b58b96">v92</small></div><div class="stat"><span class='cuteCoin'></span><small id="coins">500</small></div><div class="stat">💎<small id="gems">3</small></div><div class="stat">❤️<small id="hearts">3/3</small></div></header><main>
+</style><style id="v93-ui">
+.v92Body button.v93chosen{border-color:#e78faf!important;background:linear-gradient(135deg,#ffe1eb,#f0ebff)!important;box-shadow:0 0 0 2px #ffd0df inset,0 5px 12px rgba(167,105,131,.12)!important}
+.v93breath{animation:v93breath 2.3s ease-in-out infinite;transform-origin:50% 80%}@keyframes v93breath{50%{transform:translateY(-4px) scale(1.015)}}
+#wardrobe>.card{max-width:100%!important}#wardrobe .wardStage{overflow:hidden!important}.v92Control{box-shadow:0 8px 20px rgba(101,78,91,.07)}
+.v92Body button{transition:.15s ease}.v92Body button:active{transform:scale(.96)}
+</style></head><body><div class="app"><header><button class="menu">≡</button><div class="logo">English<br>Quest <small style="font:700 10px sans-serif;letter-spacing:1px;color:#b58b96">v94</small></div><div class="stat"><span class='cuteCoin'></span><small id="coins">500</small></div><div class="stat">💎<small id="gems">3</small></div><div class="stat">❤️<small id="hearts">3/3</small></div></header><main>
 <section id="home" class="page on"><div class="rpgbar"><b id="levelBadge">Lv.1</b><div><small id="xpText">EXP 0 / 100</small><div class="xptrack"><i id="xpBar" style="width:0%"></i></div></div><span id="weaponBadge">🪵</span></div><div class="hero artHero"><div class="quote">每天一點點英文，<br>讓更好的自己越來越靠近 ♡</div><div class="avatarWrap" id="homeAvatar"></div><div class="dogWrap" id="homeDog"></div><div class="homeBtns"><button class="pill" data-go="map">🗺️ 闖關</button><button class="pill" data-go="games">🎮 遊戲</button><button class="pill" data-go="wardrobe">👗 衣櫥</button></div></div><div class="v80Stores"><button data-v80shop="clothes">👗<b>服裝商店</b></button><button data-v80shop="weapon">⚔️<b>武器商店</b></button></div>
 <div class="card"><h3>今日任務</h3><p>完成 1 回英文闖關，可獲得 50 金幣。<br><small>今天也只要進步一點點就很好。</small></p>
 <button class="big v78Daily" id="v78DailyBtn">開始今日任務</button><p id="v78DailyState"></p><div class="v80MissionGrid">
@@ -1014,5 +1019,55 @@ renderWard=function(){oldRW();if(window.wardAvatar)wardAvatar.innerHTML=avatar()
 function enhance(){let sec=document.querySelector('#wardrobe'),card=sec&&sec.querySelector('.card');if(!card)return;let x=card.querySelector('.v92Control');if(x)x.remove();x=document.createElement('div');x.className='v92Control';x.innerHTML='<div class="v92Tabs">'+[['hair','髮型'],['color','髮色'],['makeup','妝容'],['dress','服裝'],['acc','配飾']].map(a=>`<button data-v92tab="${a[0]}">${a[1]}</button>`).join('')+'</div><div class="v92Body"></div>';card.appendChild(x);show('hair')}
 function show(t){let b=document.querySelector('.v92Body');if(!b)return;document.querySelectorAll('[data-v92tab]').forEach(x=>x.classList.toggle('sel',x.dataset.v92tab===t));if(t==='hair')b.innerHTML=Object.entries(hairNames).map(([v,n])=>`<button data-v92set="hair" data-v="${v}">${n}</button>`).join('');else if(t==='color')b.innerHTML=hairColors.map(([n,v])=>`<button data-v92set="color" data-v="${v}"><i style="background:${v}"></i>${n}</button>`).join('');else if(t==='makeup')b.innerHTML=[['brow','眉毛'],['lashes','睫毛'],['iris','瞳孔'],['shadow','眼影'],['blush','腮紅'],['lip','口紅']].map(x=>`<button data-v92make="${x[0]}">${x[1]}</button>`).join('');else if(t==='dress')b.innerHTML=Object.entries(dressNames).map(([v,n])=>`<button data-v92set="dress" data-v="${v}">${n}</button>`).join('');else b.innerHTML=Object.entries(accNames).map(([v,n])=>`<button data-v92set="acc" data-v="${v}">${n}</button>`).join('')}
 document.addEventListener('click',e=>{let t=e.target.closest('[data-v92tab]');if(t){show(t.dataset.v92tab);return}let mm=e.target.closest('[data-v92make]');if(mm){let k=mm.dataset.v92make,b=document.querySelector('.v92Body');b.innerHTML=make[k].map(([n,v])=>`<button data-v92set="make:${k}" data-v="${v}"><i style="background:${k==='brow'||k==='lashes'?'#66535d':v}"></i>${n}</button>`).join('');return}let q=e.target.closest('[data-v92set]');if(!q)return;let k=q.dataset.v92set,v=q.dataset.v;S.avatar=S.avatar||{};S.avatar.makeup=S.avatar.makeup||{};if(k==='hair')S.avatar.hair=v;else if(k==='color')S.avatar.color=v;else if(k==='dress')S.avatar.dress=v;else if(k==='acc')S.avatar.acc=v;else S.avatar.makeup[k.split(':')[1]]=v;save();if(window.wardAvatar)wardAvatar.innerHTML=avatar()});
+})();
+</script><script id="v93-enhance">
+(function(){
+function refreshSelected(){
+ const a=S.avatar||{},m=a.makeup||{};
+ document.querySelectorAll('[data-v92set]').forEach(b=>{let k=b.dataset.v92set,v=b.dataset.v,ok=false;if(k==='hair')ok=a.hair===v;else if(k==='color')ok=a.color===v;else if(k==='dress')ok=a.dress===v;else if(k==='acc')ok=a.acc===v;else if(k&&k.startsWith('make:'))ok=m[k.split(':')[1]]===v;b.classList.toggle('v93chosen',ok)});
+}
+document.addEventListener('click',e=>{
+ if(e.target.closest('[data-v92set]'))setTimeout(refreshSelected,0);
+ const mt=e.target.closest('[data-v92tab="makeup"]');
+ if(mt)setTimeout(()=>{const b=document.querySelector('.v92Body');if(b&&!b.querySelector('[data-v93clear]'))b.insertAdjacentHTML('beforeend','<button data-v93clear="1">✨<br>素顏重設</button>')},0);
+ const c=e.target.closest('[data-v93clear]');if(c){S.avatar=S.avatar||{};S.avatar.makeup={brow:'soft',lashes:'natural',iris:'#6b4b46',shadow:'#dfc2aa',blush:'#f5a6b8',lip:'#cf8d91'};save();if(window.wardAvatar)wardAvatar.innerHTML=window.v92Avatar();refreshSelected()}
+},true);
+const oldRW=renderWard;renderWard=function(){oldRW();setTimeout(refreshSelected,0)};
+const oldDog=dogSVG;dogSVG=function(mood='idle'){let x=oldDog(mood);if(mood==='idle')x=x.replace('v91PetMini ','v91PetMini v93breath ');return x};
+})();
+</script><style id="v94-final-ui">
+/* v94 authoritative mobile layout */
+#wardrobe>.card{height:calc(100dvh - 178px)!important;min-height:520px!important;display:grid!important;grid-template-rows:minmax(330px,1fr) 145px!important;gap:7px!important;overflow:hidden!important;padding:8px!important}
+#wardrobe .wardStage{height:auto!important;min-height:330px!important;margin:0!important;border-radius:26px!important;overflow:hidden!important;background:linear-gradient(180deg,#fff8fb,#f5faff)!important}
+#wardrobe .wardStage .avatarWrap{width:100%!important;height:100%!important;left:0!important;bottom:0!important;display:grid!important;place-items:center!important;overflow:hidden!important}
+#wardrobe .wardStage .avatarWrap>*:not(.v94Anime){display:none!important}
+.v94Anime{height:100%!important;width:auto!important;max-width:100%!important;object-fit:contain!important;display:block!important;filter:drop-shadow(0 12px 12px rgba(92,67,80,.10))}
+#wardrobe>.card>.tabs,#wardrobe>.card>.choices,#wardrobe>.card>.v88Beauty,#wardrobe>.card>.v91Beauty,#wardrobe>.card>.v92Control{display:none!important}
+.v94Panel{height:145px;border:1px solid #eadde3;border-radius:21px;background:linear-gradient(145deg,#fff8fb,#f0f9ff);padding:7px;overflow:hidden}.v94Tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.v94Tabs button{height:34px;border:1px solid #eadde3;border-radius:12px;background:#fff;font-size:10px;font-weight:900;color:#62576a}.v94Tabs button.on{background:#ffe0ea;border-color:#e8afc2}.v94Options{display:flex;gap:5px;overflow-x:auto;padding-top:6px}.v94Options::-webkit-scrollbar{display:none}.v94Options button{flex:0 0 80px;height:88px;border:1px solid #eadde3;border-radius:14px;background:#fff;font-size:9px;font-weight:800;color:#655a6c}.v94Options i{display:block;width:29px;height:29px;border-radius:50%;margin:0 auto 5px;border:2px solid #fff;box-shadow:0 0 0 1px #ded2d8}
+#pet .petScene{overflow:hidden!important}.v94Pet{width:100%!important;height:100%!important;object-fit:cover!important;border-radius:24px!important;display:block!important}.v94MiniPet{width:100%;height:100%;object-fit:cover;border-radius:22px;animation:v94float 2.2s ease-in-out infinite}@keyframes v94float{50%{transform:translateY(-5px)}}
+@media(max-height:700px){#wardrobe>.card{height:calc(100dvh - 160px)!important;grid-template-rows:minmax(280px,1fr) 132px!important}.v94Panel{height:132px}.v94Options button{height:75px}}
+</style>
+<script id="v94-final-authoritative">
+(function(){
+const AV=V91_AVATAR, PET=V91_PET;
+/* Remove any stale PWA worker/cache that can keep v90 alive after index replacement. */
+if('serviceWorker' in navigator)navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{});
+if(window.caches)caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k)))).catch(()=>{});
+const names={hair:{wave:'柔捲長髮',short:'俏麗短髮',bun:'丸子盤髮',bob:'法式鮑伯',pony:'高馬尾',twin:'雙馬尾',braid:'側編髮',princess:'公主頭',wolf:'狼尾髮'},dress:{sakura:'櫻花蕾絲',academy:'晴空學院',latte:'奶茶旅行',forest:'森林小花',moon:'月光星願',picnic:'野餐格紋',sailor:'水手蝴蝶結',strawberry:'草莓甜點',lavender:'紫藤夢境',cardigan:'日系針織',kimono:'櫻和風',catcafe:'小貓咖啡'},acc:{none:'無配飾',bag:'側背包',bow:'蝴蝶結',clip:'花朵髮夾',pearl:'珍珠耳飾',beret:'貝雷帽',necklace:'星月項鍊',ribbonbag:'蝴蝶結小包',glasses:'圓框眼鏡',headband:'珍珠髮箍',starearring:'星星耳環'}};
+const colors=[['黑茶','#3d3032'],['可可','#70483c'],['奶茶','#a77b62'],['焦糖','#b9824e'],['蜂蜜','#d5ad72'],['霧粉','#a87379'],['櫻粉','#d99aaa'],['莓紅','#8f4e59'],['薰衣草','#8d789d'],['灰藍','#718595'],['亞麻灰','#918b83'],['深夜藍','#39495d']];
+const makeup={brow:['柔和眉','平直眉','弧形眉','甜心眉'],lashes:['自然睫毛','纖長睫毛','濃密睫毛','娃娃睫毛'],iris:['可可瞳','蜂蜜瞳','橄欖瞳','灰藍瞳','紫晶瞳','黑曜瞳'],shadow:['裸杏眼影','蜜桃眼影','玫瑰眼影','薰衣草眼影','可可眼影','香檳眼影'],blush:['蜜桃腮紅','杏桃腮紅','玫瑰腮紅','莓果腮紅'],lip:['裸粉口紅','珊瑚口紅','玫瑰口紅','莓紅口紅','奶茶口紅']};
+function drawWard(){
+ const sec=document.querySelector('#wardrobe'),card=sec&&sec.querySelector('.card'),wrap=sec&&sec.querySelector('.avatarWrap');if(!card||!wrap)return;
+ wrap.innerHTML='<img class="v94Anime" src="'+AV+'" alt="日系動漫角色">';
+ let p=card.querySelector('.v94Panel');if(!p){p=document.createElement('div');p.className='v94Panel';card.appendChild(p)}
+ p.innerHTML='<div class="v94Tabs">'+[['hair','髮型'],['color','髮色'],['makeup','妝容'],['dress','服裝'],['acc','配飾']].map(x=>'<button data-v94tab="'+x[0]+'">'+x[1]+'</button>').join('')+'</div><div class="v94Options"></div>';show('hair');
+}
+function show(t){const b=document.querySelector('.v94Options');if(!b)return;document.querySelectorAll('[data-v94tab]').forEach(x=>x.classList.toggle('on',x.dataset.v94tab===t));if(t==='color')b.innerHTML=colors.map(x=>'<button data-v94set="color" data-v="'+x[1]+'"><i style="background:'+x[1]+'"></i>'+x[0]+'</button>').join('');else if(t==='makeup')b.innerHTML=Object.entries(makeup).map(x=>'<button data-v94make="'+x[0]+'">'+x[1][0].replace(/(眉|睫毛|瞳|眼影|腮紅|口紅).*/, '$1')+'</button>').join('');else b.innerHTML=Object.entries(names[t]).map(x=>'<button data-v94set="'+t+'" data-v="'+x[0]+'">'+x[1]+'</button>').join('')}
+const baseRW=renderWard;renderWard=function(){baseRW();requestAnimationFrame(drawWard)};
+const baseRP=renderPet;renderPet=function(){baseRP();if(window.petDog)petDog.innerHTML='<img class="v94Pet" src="'+PET+'" alt="白色長耳狗">'};
+dogSVG=function(){return '<img class="v94MiniPet" src="'+PET+'" alt="白色長耳狗">'};
+document.addEventListener('click',e=>{let t=e.target.closest('[data-v94tab]');if(t){show(t.dataset.v94tab);return}let m=e.target.closest('[data-v94make]');if(m){let k=m.dataset.v94make,b=document.querySelector('.v94Options');b.innerHTML=makeup[k].map((n,i)=>'<button data-v94set="make:'+k+'" data-v="'+i+'">'+n+'</button>').join('');return}let q=e.target.closest('[data-v94set]');if(!q)return;S.avatar=S.avatar||{};S.avatar.makeup=S.avatar.makeup||{};let k=q.dataset.v94set,v=q.dataset.v;if(k==='hair')S.avatar.hair=v;else if(k==='color')S.avatar.color=v;else if(k==='dress')S.avatar.dress=v;else if(k==='acc')S.avatar.acc=v;else if(k.startsWith('make:'))S.avatar.makeup[k.split(':')[1]]=v;save();},true);
+/* Force refresh of current visible screen after all older renderers have loaded. */
+setTimeout(()=>{if(document.querySelector('#wardrobe.active'))drawWard();if(document.querySelector('#pet.active'))renderPet();},60);
 })();
 </script></body></html>
